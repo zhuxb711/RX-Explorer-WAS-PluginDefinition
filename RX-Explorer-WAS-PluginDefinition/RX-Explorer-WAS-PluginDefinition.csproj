@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>RX_Explorer_WAS.PluginDefinition</RootNamespace>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<IncludeSymbols>True</IncludeSymbols>
+	<Title>PluginDefinition</Title>
+	<Version>1.2.5</Version>
+	<Authors>RuoFan</Authors>
+	<Product>RX-Explorer (WAS)</Product>
+	<Description>Plugin definition for RX-Explorer (WAS)</Description>
+	<Copyright>RX-Explorer Developer. All rights reserved.</Copyright>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<PackageId>RX-Explorer-WAS.PluginDefinition</PackageId>
+	<AssemblyName>RX-Explorer-WAS.PluginDefinition</AssemblyName>
+	<RepositoryUrl>https://github.com/zhuxb711/RX-Explorer-PluginDefinition</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/zhuxb711/RX-Explorer-PluginDefinition</PackageProjectUrl>
+  </PropertyGroup>
+  <ItemGroup>
+	<None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
