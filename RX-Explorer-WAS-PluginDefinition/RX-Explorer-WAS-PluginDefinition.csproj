@@ -19,10 +19,4 @@
   <ItemGroup>
 	<None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-  	<Target Name="_CopyToOutputPathAndZip" AfterTargets="GenerateNuspec" Condition="'$(Configuration)'=='Release' And Exists('$(PackageOutputPath)') And Exists('$(PublishOutputPath)')">
-		<PropertyGroup>
-		  <OUTPUTPLUGINFILE>$(PublishOutputPath)\$(AssemblyName).zip</OUTPUTPLUGINFILE>
-		</PropertyGroup>
-		<ZipDirectory Overwrite="true" SourceDirectory="$(PackageOutputPath)" DestinationFile="$(OUTPUTPLUGINFILE)" />
-    </Target>
 </Project>

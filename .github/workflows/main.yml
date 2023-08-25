@@ -18,7 +18,6 @@ jobs:
       ProjectName: RX-Explorer-WAS-PluginDefinition
       SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.sln
       PublishOutputPath: ${{github.workspace}}\Output
-      PackageOutputPath: ${{github.workspace}}\Output\Package
 
     steps:
       - name: Checkout
@@ -41,7 +40,7 @@ jobs:
         with:
           nuget-version: latest
 
-      - name: Create PublishOutput And PackageOutput folder
+      - name: Create PublishOutput folder
         run: |
           New-Item -ItemType Directory -Path $env:PublishOutputPath
 
@@ -49,10 +48,7 @@ jobs:
         run: nuget restore $env:SolutionPath
 
       - name: Create the PluginDllResolver package
-        run: msbuild $env:SolutionPath /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=$env:Configuration /p:PublishOutputPath=${{env.PublishOutputPath}}\ /p:PackageOutputPath=${{env.PackageOutputPath}}\
-
-      - name: Cleanup redundant files
-        run: Remove-Item -Path $env:PackageOutputPath -Recurse
+        run: msbuild $env:SolutionPath /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=$env:Configuration /p:PackageOutputPath=${{env.PublishOutputPath}}\
 
       - name: Remove old artifacts
         uses: c-hive/gha-remove-artifacts@v1.3.0
