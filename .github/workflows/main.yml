@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  SideloadBuild:
+  PluginDefinitionNugetBuild:
     runs-on: windows-latest
     env:
       Configuration: Release
@@ -19,7 +19,6 @@ jobs:
       SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.sln
       PublishOutputPath: ${{github.workspace}}\Output
       PackageOutputPath: ${{github.workspace}}\Output\Package
-      NUGET_RESTORE_MSBUILD_ARGS: /p:Configuration=Release
 
     steps:
       - name: Checkout
