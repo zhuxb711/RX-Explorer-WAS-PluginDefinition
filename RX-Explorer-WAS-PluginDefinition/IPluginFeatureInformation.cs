@@ -8,6 +8,10 @@ namespace RX_Explorer_WAS.PluginDefinition
 
         public bool IsEnabled { get; }
 
+        public bool IsElevationRequired { get; }
+
+        public InvokeScenario InvokeScenario { get; }
+
         public string GetLocaleName(string Locale);
 
         public string GetLocaleDescription(string Locale);
