@@ -42,13 +42,13 @@ jobs:
 
       - name: Create PublishOutput folder
         run: |
-          New-Item -ItemType Directory -Path $env:PublishOutputPath
+          New-Item -ItemType Directory -Path ${{env.PublishOutputPath}}
 
       - name: Restore the solution
-        run: nuget restore $env:SolutionPath
+        run: nuget restore ${{env.SolutionPath}}
 
-      - name: Create the PluginDllResolver package
-        run: msbuild $env:SolutionPath /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=$env:Configuration /p:PackageOutputPath=${{env.PublishOutputPath}}\
+      - name: Create the nuget package
+        run: msbuild ${{env.SolutionPath}} /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=${{env.Configuration}} /p:PackageOutputPath=${{env.PublishOutputPath}}\
 
       - name: Remove old artifacts
         uses: c-hive/gha-remove-artifacts@v1.3.0
@@ -57,8 +57,8 @@ jobs:
           skip-recent: 5
           skip-tags: false
 
-      - name: Upload RX-Explorer-WAS-PluginDefinition artifacts
+      - name: Upload Plugin Definition artifacts
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: Plugin Definition Nuget Artifacts
+          name: Plugin Definition Artifacts
           path: ${{env.PublishOutputPath}}

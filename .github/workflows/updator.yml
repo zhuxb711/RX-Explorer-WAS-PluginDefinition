@@ -1,4 +1,4 @@
-name: GitHub Actions Version Updater
+name: GitHub Actions Dependencies Updater
 
 on:
   schedule:
@@ -14,7 +14,7 @@ jobs:
         with:
           token: ${{secrets.WORKFLOW_SECRET}}
 
-      - name: Run GitHub Actions Version Updater
+      - name: Run GitHub Actions Dependencies Updater
         uses: saadmk11/github-actions-version-updater@v0.8.1
         with:
           token: ${{secrets.WORKFLOW_SECRET}}
