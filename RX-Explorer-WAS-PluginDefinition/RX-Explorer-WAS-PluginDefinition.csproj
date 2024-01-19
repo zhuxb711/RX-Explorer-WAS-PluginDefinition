@@ -3,12 +3,12 @@
 	<LangVersion>latest</LangVersion>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>RX_Explorer_WAS.PluginDefinition</RootNamespace>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<IncludeSymbols>true</IncludeSymbols>
-	<Title>PluginDefinition</Title>
-	<Version>1.3.3</Version>
+	<Version>1.3.4</Version>
 	<Authors>RuoFan</Authors>
+	<Title>PluginDefinition</Title>
 	<Product>RX-Explorer (WAS)</Product>
+	<IncludeSymbols>true</IncludeSymbols>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<Description>Plugin definition for RX-Explorer (WAS)</Description>
 	<Copyright>RX-Explorer Developer. All rights reserved.</Copyright>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>

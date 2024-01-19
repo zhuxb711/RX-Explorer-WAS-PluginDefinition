@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace RX_Explorer_WAS.PluginDefinition
+namespace RX_Explorer_WAS.PluginDefinition.Enum
 {
     /// <summary>
     /// Define the enum on invoke scenario.
@@ -22,7 +22,7 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Invoke the feature on application launch.
         /// </summary>
         /// <remarks>
-        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/> and would ignore any return value.
+        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> and would ignore any return value.
         /// </remarks>
         Launch = 1,
 
@@ -30,7 +30,7 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Invoke the feature on application shutdown.
         /// </summary>
         /// <remarks>
-        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/> and would ignore any return value.
+        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> and would ignore any return value.
         /// </remarks>
         Shutdown = 2,
 
@@ -38,9 +38,9 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Invoke the feature on application needs to elevate itself.
         /// </summary>
         /// <remarks>
-        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/>.<br/>
+        /// Host will invoke those plugin through <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/>.<br/>
         /// Especially, the plugin developer should not set <see cref="IPluginFeatureInformation.IsElevationRequired"/> to <see langword="true"/>.<br/>
-        /// Plugin developer should return <see cref="Process"/> from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/>.
+        /// Plugin developer should return <see cref="Process"/> from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/>.
         /// </remarks>
         Elevation = 4
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using RX_Explorer_WAS.PluginDefinition.Enum;
 
 namespace RX_Explorer_WAS.PluginDefinition
 {
@@ -29,8 +30,8 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// </summary>
         /// <remarks>
         /// If this flag is set to true, Host will make sure that the plugin is executed in elevated privilege.<br/>
-        /// However, any return value from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/> will be ignore.<br/>
-        /// Which means that host will invoke through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, object[])"/> instead.<br/>
+        /// However, any return value from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> will be ignore.<br/>
+        /// Which means that host will invoke through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> instead.<br/>
         /// So you should use this flag to process the task that requires elevated privilege and no need to exchange data with the host.<br/>
         /// </remarks>
         public bool IsElevationRequired { get; }
