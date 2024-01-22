@@ -63,5 +63,15 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// <param name="Locale">Locale code for localization.</param>
         /// <returns>Localized description.</returns>
         public string GetLocaleDescription(string Locale);
+
+        /// <summary>
+        /// Get the reason about why this feature is being disabled. <br/> If the feature's <see cref="IPluginFeatureInformation.IsEnabled"/> is <see langword="false"/>, this message would help user know what is going wrong. 
+        /// </summary>
+        /// <remarks>
+        /// Do not return <see langword="null"/> or <see cref="string.Empty"/> if <see cref="IPluginFeatureInformation.IsEnabled"/> is <see langword="false"/>.
+        /// </remarks>
+        /// <param name="Locale">Locale code for localization.</param>
+        /// <returns>Localized description.</returns>
+        public string GetLocaleUnavailableReason(string Locale);
     }
 }
