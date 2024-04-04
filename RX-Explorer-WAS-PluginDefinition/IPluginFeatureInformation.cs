@@ -29,10 +29,8 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Indicate whether this feature should be executed with elevated privilege.
         /// </summary>
         /// <remarks>
-        /// If this flag is set to true, Host will make sure that the plugin is executed in elevated privilege.<br/>
-        /// However, any return value from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> will be ignore.<br/>
-        /// Which means that host will invoke through <see cref="IInvokablePluginComponent.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> instead.<br/>
-        /// So you should use this flag to process the task that requires elevated privilege and no need to exchange data with the host.<br/>
+        /// If this flag is set to true, host will call <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> only have elevated privilege.<br/>
+        /// Host will also display a message to the user to indicator that you needs elevation to work properly. If no elevated privilege is available, host will ignore the feature automatically. <br/>
         /// </remarks>
         public bool IsElevationRequired { get; }
 

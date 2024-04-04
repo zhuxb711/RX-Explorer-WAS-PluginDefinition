@@ -39,7 +39,8 @@ namespace RX_Explorer_WAS.PluginDefinition.Enum
         /// <remarks>
         /// Host will invoke those plugin through <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/>.<br/>
         /// Especially, the plugin developer should not set <see cref="IPluginFeatureInformation.IsElevationRequired"/> to <see langword="true"/>.<br/>
-        /// Plugin developer should return <see cref="Process"/> from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/>.
+        /// Plugin developer should return <see cref="Process"/> from <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/>.<br/><br/>
+        /// Warning: Only the first plugin's feature with <see cref="InvokeScenario.Elevation"/> that return <see cref="Process"/> successfully will be used by host. Which means if multiple plugins provide the feature about <see cref="InvokeScenario.Elevation"/>, will use the first success one.
         /// </remarks>
         Elevation = 4,
 
