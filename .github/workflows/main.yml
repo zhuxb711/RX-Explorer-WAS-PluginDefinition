@@ -51,7 +51,7 @@ jobs:
         run: msbuild ${{env.SolutionPath}} /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=${{env.Configuration}} /p:PackageOutputPath=${{env.PublishOutputPath}}\
 
       - name: Remove old artifacts
-        uses: c-hive/gha-remove-artifacts@v1.3.0
+        uses: c-hive/gha-remove-artifacts@v1.4.0
         with:
           age: 0 seconds
           skip-recent: 5
