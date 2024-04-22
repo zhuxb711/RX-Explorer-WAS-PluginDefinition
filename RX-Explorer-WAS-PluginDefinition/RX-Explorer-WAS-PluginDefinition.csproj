@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	<LangVersion>latest</LangVersion>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>RX_Explorer_WAS.PluginDefinition</RootNamespace>
-	<Version>1.3.8</Version>
+	<Version>1.4.0</Version>
 	<Authors>RuoFan</Authors>
 	<Title>PluginDefinition</Title>
 	<Product>RX-Explorer (WAS)</Product>
