@@ -3,7 +3,7 @@
 	<LangVersion>latest</LangVersion>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>RX_Explorer_WAS.PluginDefinition</RootNamespace>
-	<Version>1.4.1</Version>
+	<Version>1.4.2</Version>
 	<Authors>RuoFan</Authors>
 	<Title>PluginDefinition</Title>
 	<Product>RX-Explorer (WAS)</Product>

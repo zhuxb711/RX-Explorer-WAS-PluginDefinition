@@ -19,13 +19,13 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// </summary>
         /// <param name="Feature">Feature that would like to be invoked.</param>
         /// <param name="Status">Feature status</param>
-        /// <param name="Parameters">Invoke parameters.</param>
+        /// <param name="InputParameters">Invoke parameters.</param>
         /// <param name="CancelToken">Cancellation token</param>
         /// <remarks>
         /// Host will invoke the plugin and receive the result through this function, plugin developer should implement this function properly.<br/>
         /// Please make sure use <see langword="async"/> execution in this function even you do not actually need <see langword="async"/> so that it would not block the UI thread.<br/>
         /// For example: use <see cref="Task.Run(System.Action)"/> to warp the code you want to execute.
         /// </remarks>
-        public new Task<T> InvokeFeatureAsync(IPluginFeatureInformation Feature, FeatureStatus Status, IEnumerable<object> Parameters, CancellationToken CancelToken = default);
+        public new Task<T> InvokeFeatureAsync(IPluginFeatureInformation Feature, FeatureStatus Status, IEnumerable<object> InputParameters = null, CancellationToken CancelToken = default);
     }
 }
