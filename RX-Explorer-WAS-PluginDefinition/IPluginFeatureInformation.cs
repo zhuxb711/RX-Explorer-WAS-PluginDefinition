@@ -1,5 +1,7 @@
-﻿using System;
-using RX_Explorer_WAS.PluginDefinition.Enum;
+﻿using RX_Explorer_WAS.PluginDefinition.Enum;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace RX_Explorer_WAS.PluginDefinition
 {
@@ -29,7 +31,7 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Indicate whether this feature should be executed with elevated privilege.
         /// </summary>
         /// <remarks>
-        /// If this flag is set to true, host will call <see cref="IInvokablePluginComponent{T}.InvokePluginFeatureAsync(IPluginFeatureInformation, FeatureStatus, object[])"/> only have elevated privilege.<br/>
+        /// If this flag is set to true, host will call <see cref="IInvokablePluginComponent{T}.InvokeFeatureAsync(IPluginFeatureInformation, FeatureStatus, IEnumerable{object}, CancellationToken)"/> only have elevated privilege.<br/>
         /// Host will also display a message to the user to indicator that you needs elevation to work properly. If no elevated privilege is available, host will ignore the feature automatically. <br/>
         /// </remarks>
         public bool IsElevationRequired { get; }
