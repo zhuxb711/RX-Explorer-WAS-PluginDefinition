@@ -36,7 +36,7 @@ jobs:
           msbuild-architecture: x64
 
       - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v2.0.0
+        uses: NuGet/setup-nuget@v2.0.1
         with:
           nuget-version: latest
 
