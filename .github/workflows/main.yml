@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install .NET Sdk
-        uses: actions/setup-dotnet@v4.2.0
+        uses: actions/setup-dotnet@v4.3.0
         with:
           dotnet-version: 9.x
 
