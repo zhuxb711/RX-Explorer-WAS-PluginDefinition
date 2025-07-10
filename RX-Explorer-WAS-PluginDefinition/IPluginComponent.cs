@@ -57,5 +57,27 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// If no feature is available for the plugin, you should return a empty <see cref="IEnumerable{IPluginFeatureInformation}"/> rather than <see langword="null"/>.
         /// </remarks>
         public IEnumerable<IPluginFeatureInformation> SupportedFeatures { get; }
+
+        /// <summary>
+        /// Default implementation of the <see cref="IDisposable.Dispose"/> method.<br/>
+        /// </summary>
+        /// <remarks>
+        /// Implementation of this method should release all the resources that the plugin component used.
+        /// </remarks>
+        void IDisposable.Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Default implementation of the <see cref="IAsyncDisposable.DisposeAsync"/> method.<br/>
+        /// </summary>
+        /// <remarks>
+        /// Implementation of this method should release all the resources that the plugin component used.
+        /// </remarks>
+        ValueTask IAsyncDisposable.DisposeAsync()
+        {
+            return new ValueTask(Task.Run(Dispose));
+        }
     }
 }
