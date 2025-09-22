@@ -14,51 +14,54 @@ jobs:
   PluginDefinitionNugetBuild:
     runs-on: windows-latest
     env:
-      Configuration: Release
-      ProjectName: RX-Explorer-WAS-PluginDefinition
-      SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.sln
-      PublishOutputPath: ${{github.workspace}}\Output
+      Env_Configuration: Release
+      Env_ProjectName: RX-Explorer-WAS-PluginDefinition
+      Env_BuildToolArchitecture: x64
+      Env_SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.slnx
+      Env_PublishOutputPath: ${{github.workspace}}\Output
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
 
-      - name: Install .NET Sdk
-        uses: actions/setup-dotnet@v5.0.0
+      - name: Install Latest .NET 9 SDK
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.x
 
-      - name: Setup MSBuild.exe
+      - name: Install Latest MSBuild Workload
         uses: microsoft/setup-msbuild@v2
         with:
           msbuild-architecture: x64
 
-      - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v2.0.1
-        with:
-          nuget-version: latest
-
       - name: Create PublishOutput folder
+        shell: pwsh
         run: |
-          New-Item -ItemType Directory -Path ${{env.PublishOutputPath}}
+          New-Item -ItemType Directory -Path ${{env.Env_PublishOutputPath}}
 
-      - name: Restore the solution
-        run: nuget restore ${{env.SolutionPath}}
+      - name: Build Plugin Definition Artifacts
+        shell: pwsh
+        run: |
+            msbuild "${{env.Env_SolutionPath}}" `
+              /m `
+              /nr:false `
+              /restore `
+              /t:Clean,${{env.Env_ProjectName}}:Pack `
+              /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
+              /p:Configuration="${{env.Env_Configuration}}" `
+              /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\"
 
-      - name: Create the nuget package
-        run: msbuild ${{env.SolutionPath}} /t:${{env.ProjectName}}:Pack /nologo /nr:false /t:Clean /p:Configuration=${{env.Configuration}} /p:PackageOutputPath=${{env.PublishOutputPath}}\
-
-      - name: Remove old artifacts
+      - name: Remove Old Artifacts
         uses: c-hive/gha-remove-artifacts@v1.4.0
         with:
           age: 0 seconds
           skip-recent: 5
           skip-tags: false
 
-      - name: Upload Plugin Definition artifacts
-        uses: actions/upload-artifact@v4.6.2
+      - name: Upload Plugin Definition Artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: Plugin Definition Artifacts
-          path: ${{env.PublishOutputPath}}
+          compression-level: 9
+          if-no-files-found: error
+          path: ${{env.Env_PublishOutputPath}}

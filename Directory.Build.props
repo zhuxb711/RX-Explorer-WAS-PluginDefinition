@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Label="ExtraInformation">
+    <Authors>RuoFan</Authors>
+    <Product>RX-Explorer-WAS-PluginDefinition</Product>
+    <AssemblyTitle>RX-Explorer-WAS-PluginDefinition</AssemblyTitle>
+    <Copyright>RX-Explorer Developer. All rights reserved.</Copyright>
+    <Description>Plugin definition for RX-Explorer (WAS)</Description>
+    <RepositoryUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</PackageProjectUrl>
+  </PropertyGroup>
+</Project>
