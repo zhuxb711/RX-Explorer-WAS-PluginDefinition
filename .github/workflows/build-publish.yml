@@ -1,13 +1,10 @@
-name: RX-Explorer-WAS-PluginDefinition CI/CD Build
+name: RX-Explorer-WAS-PluginDefinition Publish
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+  workflow_dispatch:
 
 concurrency:
-  group: ${{github.workflow}}-${{github.event.pull_request.number || github.ref}}
+  group: ${{github.workflow}}-${{github.ref}}
   cancel-in-progress: true
 
 jobs:
