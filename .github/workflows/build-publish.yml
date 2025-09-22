@@ -19,15 +19,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v5.0.0
 
       - name: Install Latest .NET 9 SDK
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v5.0.0
         with:
           dotnet-version: 9.x
 
       - name: Install Latest MSBuild Workload
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v2.0.0
         with:
           msbuild-architecture: x64
 
@@ -56,7 +56,7 @@ jobs:
           skip-tags: false
 
       - name: Upload Plugin Definition Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: Plugin Definition Artifacts
           compression-level: 9
