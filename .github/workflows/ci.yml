@@ -1,6 +1,8 @@
-name: RX-Explorer-WAS-PluginDefinition Publish
+name: Build CI Artifacts
 
 on:
+  push:
+    branches: [master]
   workflow_dispatch:
 
 concurrency:
@@ -8,8 +10,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  PluginDefinitionNugetBuild:
+  CIBuild:
     runs-on: windows-latest
+    permissions:
+      actions: write
+      contents: read
     env:
       Env_Configuration: Release
       Env_ProjectName: RX-Explorer-WAS-PluginDefinition
@@ -31,29 +36,26 @@ jobs:
         with:
           msbuild-architecture: x64
 
-      - name: Create PublishOutput folder
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Path ${{env.Env_PublishOutputPath}}
-
       - name: Build Plugin Definition Artifacts
         shell: pwsh
         run: |
-            msbuild "${{env.Env_SolutionPath}}" `
-              /m `
-              /nr:false `
-              /restore `
-              /t:Clean,${{env.Env_ProjectName}}:Pack `
-              /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
-              /p:Configuration="${{env.Env_Configuration}}" `
-              /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\"
+          msbuild "${{env.Env_SolutionPath}}" `
+            /m `
+            /nr:false `
+            /restore `
+            /t:Clean,${{env.Env_ProjectName}}:Pack `
+            /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
+            /p:Configuration="${{env.Env_Configuration}}" `
+            /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\"
 
-      - name: Remove Old Artifacts
-        uses: c-hive/gha-remove-artifacts@v1.4.0
+      - name: Reserve Space And Cleanup Outdated Artifacts
+        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.0
         with:
-          age: 0 seconds
-          skip-recent: 5
-          skip-tags: false
+          limit: 1.5GB
+          failOnError: true
+          removeDirection: oldest
+          simulateCompressionLevel: 9
+          artifactPaths: ${{env.Env_PublishOutputPath}}
 
       - name: Upload Plugin Definition Artifacts
         uses: actions/upload-artifact@v4.6.2
