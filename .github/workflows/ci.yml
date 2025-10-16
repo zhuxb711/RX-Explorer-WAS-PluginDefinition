@@ -49,7 +49,7 @@ jobs:
             /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\"
 
       - name: Reserve Space And Cleanup Outdated Artifacts
-        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.0
+        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.1
         with:
           limit: 1.5GB
           failOnError: true
