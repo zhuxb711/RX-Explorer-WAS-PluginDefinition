@@ -1,14 +1,12 @@
 ﻿using RX_Explorer_WAS.PluginDefinition.Enum;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace RX_Explorer_WAS.PluginDefinition
 {
     /// <summary>
     /// Provide the description about every feature in the plugin.
     /// </summary>
-    public interface IPluginFeatureInformation
+    public interface IPluginFeatureComponent
     {
         /// <summary>
         /// Feature unique id.
@@ -17,6 +15,14 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Id should be unique in the same plugin dll.
         /// </remarks>
         public Guid UniqueId { get; }
+
+        /// <summary>
+        /// Specific the scenario that you want to be invoked.
+        /// </summary>
+        /// <remarks>
+        /// Host will invoke your plugin if those scenario happened.
+        /// </remarks>
+        public WorkScenario Scenario { get; }
 
         /// <summary>
         /// Indicate whether this feature should be enabled.
@@ -31,18 +37,10 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// Indicate whether this feature should be executed with elevated privilege.
         /// </summary>
         /// <remarks>
-        /// If this flag is set to true, host will call <see cref="IInvokablePluginComponent{T}.InvokeFeatureAsync(IPluginFeatureInformation, FeatureStatus, IEnumerable{object}, CancellationToken)"/> only have elevated privilege.<br/>
+        /// If this flag is set to true, host will call <see cref="IInvokablePluginComponent"/> with elevated privilege.<br/>
         /// Host will also display a message to the user to indicator that you needs elevation to work properly. If no elevated privilege is available, host will ignore the feature automatically. <br/>
         /// </remarks>
         public bool IsElevationRequired { get; }
-
-        /// <summary>
-        /// Specific the scenario that you want to be invoked.
-        /// </summary>
-        /// <remarks>
-        /// Host will invoke your plugin if those scenario happened.
-        /// </remarks>
-        public InvokeScenario InvokeScenario { get; }
 
         /// <summary>
         /// Get feature name for UI.
@@ -65,10 +63,10 @@ namespace RX_Explorer_WAS.PluginDefinition
         public string GetLocaleDescription(string Locale);
 
         /// <summary>
-        /// Get the reason about why this feature is being disabled. <br/> If the feature's <see cref="IPluginFeatureInformation.IsEnabled"/> is <see langword="false"/>, this message would help user know what is going wrong. 
+        /// Get the reason about why this feature is being disabled. <br/> If the feature's <see cref="IsEnabled"/> is <see langword="false"/>, this message would help user know what is going wrong. 
         /// </summary>
         /// <remarks>
-        /// Do not return <see langword="null"/> or <see cref="string.Empty"/> if <see cref="IPluginFeatureInformation.IsEnabled"/> is <see langword="false"/>.
+        /// Do not return <see langword="null"/> or <see cref="string.Empty"/> if <see cref="IsEnabled"/> is <see langword="false"/>.
         /// </remarks>
         /// <param name="Locale">Locale code for localization.</param>
         /// <returns>Localized description.</returns>

@@ -56,7 +56,7 @@ namespace RX_Explorer_WAS.PluginDefinition
         /// <remarks>
         /// If no feature is available for the plugin, you should return a empty <see cref="IEnumerable{IPluginFeatureInformation}"/> rather than <see langword="null"/>.
         /// </remarks>
-        public IEnumerable<IPluginFeatureInformation> SupportedFeatures { get; }
+        public IEnumerable<IPluginFeatureComponent> AvailableFeatures { get; }
 
         /// <summary>
         /// Default implementation of the <see cref="IDisposable.Dispose"/> method.<br/>

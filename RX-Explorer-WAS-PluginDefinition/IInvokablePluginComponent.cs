@@ -1,4 +1,4 @@
-﻿using RX_Explorer_WAS.PluginDefinition.Enum;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,22 +9,20 @@ namespace RX_Explorer_WAS.PluginDefinition
     /// Provide the definition of invokable plugin.
     /// </summary>
     /// <remarks>
-    /// Plugin developer should implement this interface if no need to exchange data with host.
+    /// Plugin developer should implement this interface to get feature invoked when specific scenario happened.
     /// </remarks>
     public interface IInvokablePluginComponent : IPluginComponent
     {
         /// <summary>
-        /// Invoke the plugin features through this function.
+        /// Invokes the specified feature asynchronously using the provided feature identifier and optional arguments.
         /// </summary>
-        /// <param name="Feature">Feature that would like to be invoked.</param>
-        /// <param name="Status">Feature status</param>
-        /// <param name="InputParameters">Invoke parameters.</param>
-        /// <param name="CancelToken">Cancellation token</param>
         /// <remarks>
-        /// Host will invoke the plugin through this function, plugin developer should implement this function properly.<br/>
-        /// Please make sure use <see langword="async"/> execution in this function even you do not actually need <see langword="async"/> so that it would not block the UI thread.<br/>
-        /// For example: use <see cref="Task.Run(System.Action)"/> to warp the code you want to execute.<br/>
+        /// Host will call this function when scenario matched and might provide different arguments depends on the scenario that feature belongs to.
         /// </remarks>
-        public Task InvokeFeatureAsync(IPluginFeatureInformation Feature, FeatureStatus Status, IEnumerable<object> InputParameters = null, CancellationToken CancelToken = default);
+        /// <param name="FeatureGuid">The unique identifier of the feature to invoke.</param>
+        /// <param name="Arguments">An optional collection of arguments to pass to the feature. If null, no arguments are provided.</param>
+        /// <param name="CancelToken">A cancellation token that can be used to cancel the operation. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <returns>A task that represents the asynchronous operation. The task completes when the feature invocation is finished.</returns>
+        public Task<object> InvokeFeatureAsync(Guid FeatureGuid, IEnumerable<string> Arguments = null, CancellationToken CancelToken = default);
     }
 }
