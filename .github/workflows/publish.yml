@@ -1,20 +1,23 @@
-name: Build PR Artifacts
+name: Publish Artifacts
 
 on:
-  pull_request:
-    branches: [master]
+  workflow_dispatch:
 
 concurrency:
-  group: ${{github.workflow}}-${{github.event.pull_request.number}}
+  group: ${{github.workflow}}-${{github.ref}}
   cancel-in-progress: true
 
 jobs:
-  PRBuild:
+  Publish:
     runs-on: windows-latest
+    permissions:
+      actions: write
+      contents: read
     env:
       Env_Configuration: Release
       Env_BuildToolArchitecture: x64
       Env_SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.slnx
+      Env_PublishOutputPath: ${{github.workspace}}\Output
 
     steps:
       - name: Checkout
@@ -37,6 +40,24 @@ jobs:
             /m `
             /nr:false `
             /restore `
-            /t:Clean,Build `
+            /t:Clean,Pack `
             /p:Configuration="${{env.Env_Configuration}}" `
+            /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\" `
             /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
+
+      - name: Reserve Space And Cleanup Outdated Artifacts
+        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.1
+        with:
+          limit: 1.5GB
+          failOnError: true
+          removeDirection: oldest
+          simulateCompressionLevel: 9
+          artifactPaths: ${{env.Env_PublishOutputPath}}
+
+      - name: Upload Plugin Definition Artifacts
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: Plugin Definition Artifacts
+          compression-level: 9
+          if-no-files-found: error
+          path: ${{env.Env_PublishOutputPath}}
