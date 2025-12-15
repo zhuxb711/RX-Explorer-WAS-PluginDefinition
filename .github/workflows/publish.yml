@@ -55,7 +55,7 @@ jobs:
           artifactPaths: ${{env.Env_PublishOutputPath}}
 
       - name: Upload Plugin Definition Artifacts
-        uses: actions/upload-artifact@v5.0.0
+        uses: actions/upload-artifact@v6.0.0
         with:
           name: Plugin Definition Artifacts
           compression-level: 9
