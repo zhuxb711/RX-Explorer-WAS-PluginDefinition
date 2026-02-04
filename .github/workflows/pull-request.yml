@@ -30,5 +30,6 @@ jobs:
         shell: pwsh
         run: |
           dotnet build "${{env.Env_SolutionPath}}" `
+            --verbosity normal `
             --configuration "${{env.Env_Configuration}}" `
             --property:ContinuousIntegrationBuild=true
