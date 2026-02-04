@@ -13,6 +13,7 @@ jobs:
     permissions:
       actions: write
       contents: read
+      packages: write
     env:
       Env_Configuration: Release
       Env_BuildToolArchitecture: x64
@@ -40,10 +41,26 @@ jobs:
             /m `
             /nr:false `
             /restore `
-            /t:Clean,Pack `
+            /t:Pack `
             /p:Configuration="${{env.Env_Configuration}}" `
             /p:PackageOutputPath="${{env.Env_PublishOutputPath}}\" `
             /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
+            /p:ContinuousIntegrationBuild=true
+
+      - name: Publish to GitHub Packages
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          $nupkgFiles = Get-ChildItem -Path "${{env.Env_PublishOutputPath}}" -Filter "*.nupkg"
+
+          foreach ($file in $nupkgFiles) {
+            Write-Host 'Publishing package "$($file.Name)"'
+            dotnet nuget push "$($file.FullName)" --source "github"
+            Write-Host 'Package "$($file.Name)" published successfully.'
+          }
+
+          Write-Host "All packages have been published successfully."
 
       - name: Reserve Space And Cleanup Outdated Artifacts
         uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.1

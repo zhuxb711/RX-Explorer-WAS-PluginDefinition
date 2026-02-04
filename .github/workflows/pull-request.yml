@@ -37,6 +37,7 @@ jobs:
             /m `
             /nr:false `
             /restore `
-            /t:Clean,Build `
+            /t:Build `
             /p:Configuration="${{env.Env_Configuration}}" `
             /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
+            /p:ContinuousIntegrationBuild=true
