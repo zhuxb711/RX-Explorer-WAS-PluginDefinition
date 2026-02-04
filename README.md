@@ -1,6 +1,8 @@
 # RX-Explorer-WAS-PluginDefinition
 
 [![License](https://img.shields.io/github/license/zhuxb711/RX-Explorer-WAS-PluginDefinition)](https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition/blob/main/LICENSE)
+[![NuGet Version](https://img.shields.io/nuget/v/RX-Explorer-WAS.PluginDefinition)](https://www.nuget.org/packages/RX-Explorer-WAS.PluginDefinition)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/RX-Explorer-WAS.PluginDefinition)](https://www.nuget.org/packages/RX-Explorer-WAS.PluginDefinition)
 
 ## 简介
 
@@ -8,25 +10,26 @@ RX-Explorer-WAS-PluginDefinition 是为 [RX-Explorer-WAS](https://github.com/zhu
 
 ## 安装
 
-### 通过 GitHub Packages 安装
+### 通过 NuGet 安装
 
-#### 1. 配置 GitHub Packages 源
-
-首先需要添加 GitHub Packages 作为包源。在项目根目录创建或编辑 `nuget.config` 文件：
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <add key="github" value="https://nuget.pkg.github.com/zhuxb711/index.json" />
-  </packageSources>
-</configuration>
-```
-
-#### 2. 通过 .NET CLI 安装
+#### 通过 .NET CLI 安装
 
 ```bash
-dotnet add package RX-Explorer-WAS.PluginDefinition --source "github"
+dotnet add package RX-Explorer-WAS.PluginDefinition
+```
+
+#### 通过 Package Manager Console 安装
+
+```powershell
+Install-Package RX-Explorer-WAS.PluginDefinition
+```
+
+#### 通过 PackageReference 安装
+
+在项目文件 (.csproj) 中添加：
+
+```xml
+<PackageReference Include="RX-Explorer-WAS.PluginDefinition" Version="1.6.1" />
 ```
 
 ## 快速开始
