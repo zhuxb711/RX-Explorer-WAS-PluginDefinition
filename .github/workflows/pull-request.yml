@@ -10,34 +10,25 @@ concurrency:
 
 jobs:
   PRBuild:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       Env_Configuration: Release
-      Env_BuildToolArchitecture: x64
-      Env_SolutionPath: ${{github.workspace}}\RX-Explorer-WAS-PluginDefinition.slnx
+      Env_SolutionPath: ${{github.workspace}}/RX-Explorer-WAS-PluginDefinition.slnx
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.2
 
-      - name: Install Latest .NET 9 SDK
+      - name: Install Latest .NET 10 SDK
         uses: actions/setup-dotnet@v5.1.0
         with:
-          dotnet-version: 9.x
-
-      - name: Install Latest MSBuild Workload
-        uses: microsoft/setup-msbuild@v2.0.0
-        with:
-          msbuild-architecture: x64
+          dotnet-version: 10.x
 
       - name: Build Plugin Definition Artifacts
         shell: pwsh
         run: |
-          msbuild "${{env.Env_SolutionPath}}" `
-            /m `
-            /nr:false `
-            /restore `
-            /t:Build `
-            /p:Configuration="${{env.Env_Configuration}}" `
-            /p:PreferredToolArchitecture="${{env.Env_BuildToolArchitecture}}" `
-            /p:ContinuousIntegrationBuild=true
+          dotnet build "${{env.Env_SolutionPath}}" `
+            --configuration "${{env.Env_Configuration}}" `
+            --property:ContinuousIntegrationBuild=true
