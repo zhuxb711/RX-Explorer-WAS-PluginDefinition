@@ -32,5 +32,5 @@ jobs:
         run: |
           dotnet build "${{env.Env_SolutionPath}}" `
             --verbosity normal `
-            --configuration "${{env.Env_Configuration}}" `
+            --configuration ${{env.Env_Configuration}} `
             --property:ContinuousIntegrationBuild=true

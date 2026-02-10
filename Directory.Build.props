@@ -13,12 +13,14 @@
     <RepositoryUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</RepositoryUrl>
     <PackageProjectUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</PackageProjectUrl>
   </PropertyGroup>
-  <PropertyGroup Label="SourceLink" Condition="'$(Configuration)' == 'Release'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <IncludeSymbols>true</IncludeSymbols>
     <EmbedAllSources>true</EmbedAllSources>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+	  <PackageId>RX-Explorer-WAS.PluginDefinition</PackageId>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102" PrivateAssets="All" />

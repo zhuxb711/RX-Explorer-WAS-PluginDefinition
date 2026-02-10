@@ -34,7 +34,7 @@ jobs:
           dotnet pack "${{env.Env_SolutionPath}}" `
             --verbosity normal `
             --output "${{env.Env_PublishOutputPath}}" `
-            --configuration "${{env.Env_Configuration}}" `
+            --configuration ${{env.Env_Configuration}} `
             --property:ContinuousIntegrationBuild=true
 
       - name: Login NuGet with OIDC
@@ -43,22 +43,43 @@ jobs:
         with:
           user: zhuxb711
 
-      - name: Publish to NuGet.org
+      - name: Validate And Publish
         shell: pwsh
         run: |
+          Write-Host "Starting package validation and publishing process..."
+          Write-Host "Installing package validate tool..."
+
+          dotnet tool install --global dotnet-validate --version 0.0.1-preview.537
+
+          Write-Host "Package validation tool installed successfully."
+          Write-Host "Searching for .nupkg files in the output directory..."
+
           $nupkgFiles = Get-ChildItem -Path "${{env.Env_PublishOutputPath}}" -Filter "*.nupkg"
 
+          Write-Host "Found $($nupkgFiles.Count) .nupkg files."
+          Write-Host "Including $([String]::Join(', ', '"' + $nupkgFiles.Name + '"'))"
+
           foreach ($file in $nupkgFiles) {
+            Write-Host "Validating package `"$($file.Name)`""
+
+            dotnet validate package local "$($file.FullName)"
+
+            if ($LASTEXITCODE -ne 0) {
+              Write-Error "Package `"$($file.Name)`" validation failed"
+              exit $LASTEXITCODE
+            }
+
+            Write-Host "Package `"$($file.Name)`" validation passed."
             Write-Host "Publishing package `"$($file.Name)`" to NuGet.org using Trusted Publishing"
 
             dotnet nuget push "$($file.FullName)" --source "nuget" --api-key "${{steps.login.outputs.NUGET_API_KEY}}"
 
-            if ($LASTEXITCODE -eq 0) {
-              Write-Host "Package `"$($file.Name)`" published to NuGet.org successfully."
-            } else {
+            if ($LASTEXITCODE -ne 0) {
               Write-Error "Failed to publish package `"$($file.Name)`" to NuGet.org"
               exit $LASTEXITCODE
             }
+            
+            Write-Host "Package `"$($file.Name)`" published to NuGet.org successfully."
           }
 
           Write-Host "All packages have been published to NuGet.org successfully."

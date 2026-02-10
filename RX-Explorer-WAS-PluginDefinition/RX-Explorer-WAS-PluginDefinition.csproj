@@ -1,11 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
   	<Version>1.6.1</Version>
-	<IncludeSymbols>true</IncludeSymbols>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<PackageId>RX-Explorer-WAS.PluginDefinition</PackageId>
     <RootNamespace>RX_Explorer_WAS.PluginDefinition</RootNamespace>
 	<AssemblyName>RX-Explorer-WAS.PluginDefinition</AssemblyName>
   </PropertyGroup>
