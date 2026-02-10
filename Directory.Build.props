@@ -10,8 +10,6 @@
     <AssemblyTitle>RX-Explorer-WAS-PluginDefinition</AssemblyTitle>
     <Copyright>RX-Explorer Developer. All rights reserved.</Copyright>
     <Description>Plugin definition for RX-Explorer (WAS)</Description>
-    <RepositoryUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/zhuxb711/RX-Explorer-WAS-PluginDefinition</PackageProjectUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <IncludeSymbols>true</IncludeSymbols>
