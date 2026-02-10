@@ -85,7 +85,7 @@ jobs:
           Write-Host "All packages have been published to NuGet.org successfully."
 
       - name: Reserve Space And Cleanup Outdated Artifacts
-        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.2.1
+        uses: zhuxb711/artifacts-size-based-cleanup-action@v1.3.0
         with:
           limit: 1.5GB
           failOnError: true
